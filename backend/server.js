@@ -1,5 +1,6 @@
 const express = require("express");
 const movieRoutes = require("./controllers/movieController");
+const sequelize = require("./dbConfig");
 
 const app = express();
 const PORT = 3000;
@@ -18,3 +19,13 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+//Data base sync
+(async () => {
+  try {
+    await sequelize.sync();
+    console.log("Database sync successfull");
+  } catch (error) {
+    console.error("Database sync error", error);
+  }
+})();
