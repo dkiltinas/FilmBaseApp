@@ -22,6 +22,7 @@ const Movie = sequelize.define(
       allowNull: false, //Require genre
     },
   },
+
   {
     tableName: "movies", //Table name in the database
   }

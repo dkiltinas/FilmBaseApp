@@ -16,16 +16,7 @@ app.get("/", (req, res) => {
 });
 
 // Server start
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-//Data base sync
-(async () => {
-  try {
-    await sequelize.sync();
-    console.log("Database sync successfull");
-  } catch (error) {
-    console.error("Database sync error", error);
-  }
-})();
