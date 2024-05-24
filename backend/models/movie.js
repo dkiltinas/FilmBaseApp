@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../dbConfig");
-const Actor = require("./actor");
 
 //Defining the movie model
 const Movie = sequelize.define(
@@ -13,7 +12,7 @@ const Movie = sequelize.define(
     },
     //Column: releaseDate
     releaseDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false, //Require release date
     },
     //Column: genre
@@ -21,15 +20,19 @@ const Movie = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false, //Require genre
     },
+    actors: {
+      type: DataTypes.STRING, // Can be adjusted if you want to use another data type
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   },
 
   {
     tableName: "movies", //Table name in the database
   }
 );
-
-//indicates that a movie can have multiple actors, and an actor can participate in multiple movies
-Actor.belongsToMany(Movie, { through: "MovieActor" });
-Movie.belongsToMany(Actor, { through: "MovieActor" });
 
 module.exports = Movie;
