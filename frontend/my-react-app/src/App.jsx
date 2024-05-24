@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import NavBar from "../components/NavBar";
-import HomePage from "../pages/HomePage";
-import AddMoviePage from "../pages/AddMoviePage";
-import EditMoviePage from "../pages/EditMoviePage";
-import SearchMoviesPage from "../pages/SearchMoviesPage";
+import NavBar from "./components/NavBar";
+import HomePage from "./pages/HomePage";
+import AddMoviePage from "./pages/AddMoviePage";
+import EditMoviePage from "./pages/EditMoviePage";
+import SearchMoviesPage from "./pages/SearchMoviesPage";
 // Setup routes
 function App() {
   return (
