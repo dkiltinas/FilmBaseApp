@@ -16,7 +16,7 @@ export const fetchMovies = async () => {
 // Function to delete a movie from the database by its ID.
 export const deleteMovie = async (id) => {
   try {
-    await axios.delete(`${API_URL}/movies${id}`);
+    await axios.delete(`${API_URL}/movies/${id}`);
   } catch (error) {
     console.error("Error deleting movie: ", error);
     throw error;
