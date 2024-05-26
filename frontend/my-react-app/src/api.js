@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000";
+export const API_URL = "http://localhost:3000";
 
 //Sending a request to the server to get the data from the /movies endpoint.
 
@@ -40,6 +40,18 @@ export const updateMovie = async (id, movie) => {
     await axios.put(`${API_URL}/movies/${id}`, movie);
   } catch (error) {
     console.error("Error updating movie:", error);
+    throw error;
+  }
+};
+
+export const searchMovies = async (searchParams) => {
+  try {
+    const response = await axios.get(`${API_URL}/movies/search`, {
+      params: searchParams,
+    });
+    return response.data.movies;
+  } catch (error) {
+    console.error("Error searching movies:", error);
     throw error;
   }
 };

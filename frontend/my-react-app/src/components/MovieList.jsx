@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchMovies, deleteMovie } from "../api";
 import MovieItem from "./MovieItem";
 import { useNavigate } from "react-router-dom";
+import "../styles/MovieList.css";
 
 const MovieList = () => {
   // State to store the list of movies

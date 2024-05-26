@@ -4,8 +4,8 @@ import HomePage from "./pages/HomePage";
 import AddMoviePage from "./pages/AddMoviePage";
 import EditMoviePage from "./pages/EditMoviePage";
 import SearchMoviesPage from "./pages/SearchMoviesPage";
-import MovieList from "./components/MovieList";
-import Notification from "./components/Notification";
+
+import "./styles/App.css";
 
 // Setup routes
 
@@ -15,14 +15,10 @@ function App() {
       <div className="App">
         <NavBar />
         <Routes>
-          <Route
-            path="/"
-            exact
-            element={<HomePage MovieList={<MovieList />} />}
-          />
+          <Route path="/" exact element={<HomePage />} />
           <Route path="/add-movie" element={<AddMoviePage />} />
           <Route path="/movies/edit/:id" element={<EditMoviePage />} />
-          <Route path="/search-movies" element={<SearchMoviesPage />} />
+          <Route path="/movies/search" element={<SearchMoviesPage />} />
         </Routes>
       </div>
     </Router>
