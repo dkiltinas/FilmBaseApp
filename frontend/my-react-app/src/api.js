@@ -13,12 +13,33 @@ export const fetchMovies = async () => {
     throw error;
   }
 };
+
 // Function to delete a movie from the database by its ID.
 export const deleteMovie = async (id) => {
   try {
     await axios.delete(`${API_URL}/movies/${id}`);
   } catch (error) {
     console.error("Error deleting movie: ", error);
+    throw error;
+  }
+};
+
+// Add a new movie
+export const addMovie = async (movie) => {
+  try {
+    await axios.post(`${API_URL}/movies`, movie);
+  } catch (error) {
+    console.error("Error adding movie:", error);
+    throw error;
+  }
+};
+
+// Update an existing movie
+export const updateMovie = async (id, movie) => {
+  try {
+    await axios.put(`${API_URL}/movies/${id}`, movie);
+  } catch (error) {
+    console.error("Error updating movie:", error);
     throw error;
   }
 };

@@ -35,7 +35,7 @@ const MovieList = () => {
 
   // using navigate to navigate to the edit movie page with the movie's id
   const handleEdit = (movie) => {
-    navigate(`/movies/edit/${movie.id}`);
+    navigate(`/movies/edit/${movie.id}`, { state: { movie } });
   };
 
   return (
