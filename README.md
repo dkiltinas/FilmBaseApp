@@ -1,8 +1,8 @@
 # FilmBaseApp
 
-1. To install the application download the files from https://github.com/dkiltinas/FilmBaseApp.git
+1. To install the application download the files from https://github.com/dkiltinas/FilmBaseApp.git press on the green "Code" button and download ZIP. Extract the files.
 
-2. Open powershell command line on your pc. (Right click on the folder you downloaded and press "Open In Terminal") You should see something similar "PS C:\Users\Desktop\FilmBaseApp>" Make sure the ending of this line is "FilmBaseApp>"
+2. Open powershell command line on your pc. (Right click on the folder and press "Open In Terminal") You should see something similar to "PS C:\Users\Desktop\FilmBaseApp-main>" Make sure the ending of this line is "FilmBaseApp-main>"
 
 3. Then run the command in the terminal "cd backend"
 
