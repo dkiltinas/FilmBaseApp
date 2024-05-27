@@ -2,13 +2,13 @@ import { useState } from "react";
 
 const SearchMovie = ({ onSearch }) => {
   const [title, setTitle] = useState("");
-  const [releaseDate, setReleaseDate] = useState("");
+  const [date, setReleaseDate] = useState("");
   const [genre, setGenre] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Call the onSearch function passed from the parent component
-    onSearch({ title, releaseDate, genre });
+    onSearch({ title, date, genre });
   };
 
   return (
@@ -23,8 +23,8 @@ const SearchMovie = ({ onSearch }) => {
         />
         <label>Release Date:</label>
         <input
-          type="text"
-          value={releaseDate}
+          type="number"
+          value={date}
           onChange={(e) => setReleaseDate(e.target.value)}
         />
         <label>Genre:</label>
@@ -34,6 +34,7 @@ const SearchMovie = ({ onSearch }) => {
           onChange={(e) => setGenre(e.target.value)}
         />
         <button type="submit">Search</button>
+        <button type="submit">See The Base</button>
       </form>
     </div>
   );

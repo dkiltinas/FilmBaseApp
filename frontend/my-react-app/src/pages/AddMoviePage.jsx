@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addMovie } from "../api";
+import "../styles/AddMovie.css";
+import Modal from "../components/Modal";
 
 const AddMoviePage = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +12,7 @@ const AddMoviePage = () => {
     actors: "",
     description: "",
   });
-
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -22,14 +24,19 @@ const AddMoviePage = () => {
     event.preventDefault();
     try {
       await addMovie(formData);
-      navigate("/");
+      setShowModal(true);
     } catch (error) {
       console.error("Error adding movie:", error);
     }
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+    navigate("/"); // Navigate to the home page after closing the modal
+  };
+
   return (
-    <div>
+    <div className="addMovie">
       <h2>Add Movie</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -39,15 +46,17 @@ const AddMoviePage = () => {
             name="title"
             value={formData.title}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
-          Release Date:
+          Release Year:
           <input
             type="text"
             name="releaseDate"
             value={formData.releaseDate}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -57,6 +66,7 @@ const AddMoviePage = () => {
             name="genre"
             value={formData.genre}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -66,19 +76,26 @@ const AddMoviePage = () => {
             name="actors"
             value={formData.actors}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
           Description:
-          <input
-            type="text"
+          <textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
+            rows="2"
+            required
           />
         </label>
         <button type="submit">Add Movie</button>
       </form>
+      <Modal show={showModal} handleClose={handleCloseModal}>
+        <h3>Movie Added Successfully!</h3>
+        <p>Your movie has been added to the list.</p>
+        <button onClick={handleCloseModal}>Close</button>
+      </Modal>
     </div>
   );
 };

@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react"; //
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { updateMovie } from "../api";
+import Modal from "../components/Modal";
+import "../styles/EditMovie.css";
 
 const EditMoviePage = () => {
   const navigate = useNavigate();
-  // Hook for accessing URL params
   const { id } = useParams();
-  // State variable for storing movie data
   const [movie, setMovie] = useState({
     title: "",
     releaseDate: "",
@@ -15,16 +15,14 @@ const EditMoviePage = () => {
     actors: "",
     description: "",
   });
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    // Effect hook to fetch movie data when the component mounts or when 'id' changes
     const fetchMovie = async () => {
       try {
-        // fetch movie data from the setrver
         const response = await axios.get(`/api/movies/${id}`);
         const { title, releaseDate, genre, actors, description } =
           response.data;
-        // Update the movie state with fetched data
         setMovie({ title, releaseDate, genre, actors, description });
       } catch (error) {
         console.error("Error fetching movie:", error);
@@ -34,37 +32,38 @@ const EditMoviePage = () => {
     fetchMovie();
   }, [id]);
 
-  // Function to handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Call the updateMovie function with movie data and id
       await updateMovie(id, movie);
-      // Navigate to the home page after update
-      navigate("/");
+      setShowModal(true);
     } catch (error) {
       console.error("Error updating movie:", error);
     }
   };
 
-  // Function to handle changes in form input fields
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setMovie({ ...movie, [name]: value }); // ..movie copies current input field, then setting the new value
+    setMovie({ ...movie, [name]: value });
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    navigate("/");
   };
 
   return (
-    <div>
-      {}
+    <div className="editMovie">
       <h2>Edit Movie</h2>
       <form onSubmit={handleSubmit}>
-        {}
         <label>Title:</label>
+
         <input
           type="text"
           name="title"
-          value={movie.title || ""} // making sure value is never undefined, otherwise getting an error
+          value={movie.title || ""}
           onChange={handleChange}
+          placeholder="Enter new title"
         />
         <label>Release Date:</label>
         <input
@@ -72,6 +71,7 @@ const EditMoviePage = () => {
           name="releaseDate"
           value={movie.releaseDate || ""}
           onChange={handleChange}
+          placeholder="Enter new release date"
         />
         <label>Genre:</label>
         <input
@@ -79,6 +79,7 @@ const EditMoviePage = () => {
           name="genre"
           value={movie.genre || ""}
           onChange={handleChange}
+          placeholder="Enter new genre"
         />
         <label>Actors:</label>
         <input
@@ -86,15 +87,22 @@ const EditMoviePage = () => {
           name="actors"
           value={movie.actors || ""}
           onChange={handleChange}
+          placeholder="Enter new title"
         />
         <label>Description:</label>
         <textarea
           name="description"
           value={movie.description || ""}
           onChange={handleChange}
+          placeholder="Enter new description"
         />
-        <button type="submit">Update Movie</button> {}
+        <button type="submit">Update Movie</button>
       </form>
+      <Modal show={showModal} handleClose={handleCloseModal}>
+        <h3>Movie Updated Successfully!</h3>
+        <p>Your movie has been updated.</p>
+        <button onClick={handleCloseModal}>Close</button>
+      </Modal>
     </div>
   );
 };

@@ -1,12 +1,32 @@
 .home-page {
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
+  height: 500px;
+
   padding: 20px;
 }
 
 .text h2 {
   font-size: 40px;
+  color: #f5c518;
+}
+
+h2 {
+  margin-bottom: 20px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .content {
@@ -14,9 +34,9 @@
 }
 
 .button {
-  padding: 10px 20px;
+  padding: 15px 60px;
   margin: 0 10px;
-  background-color: #192838;
+  background-color: #4d2110;
   color: #fff;
   text-decoration: none;
   border: none;
